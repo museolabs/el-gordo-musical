@@ -44,7 +44,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const titleEl = document.getElementById("track-title");
   const artistEl = document.getElementById("track-artist");
   const playlistEl = document.getElementById("track-playlist");
-  const linkEl = document.getElementById("track-link");
+  const linkEl = document.getElementById("track-link");  const loginButton = document.getElementById("login-button");
+  const authStatusEl = document.getElementById("auth-status");
+
+  // Por enquanto o botão não faz login real, só mostra uma mensagem
+  loginButton.addEventListener("click", () => {
+    alert(
+      "Nesta versão, o login com Spotify ainda está em desenvolvimento. O sorteio usa uma lista local de teste."
+    );
+  });
 
   // Função que sorteia uma faixa aleatória
   function drawRandomTrack() {
