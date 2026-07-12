@@ -24,13 +24,18 @@ fetch('tracks.json')
     console.error('Erro ao buscar tracks.json:', error);
   });
 
-// ------- SORTEAR FAIXA -------
+// ------- ELEMENTOS DA INTERFACE -------
 
 const drawButton = document.getElementById('draw-button');
 const trackTitle = document.getElementById('track-title');
 const trackArtist = document.getElementById('track-artist');
 const trackPlaylist = document.getElementById('track-playlist');
 const trackLink = document.getElementById('track-link');
+
+const loginButton = document.getElementById('login-button');
+const authStatus = document.getElementById('auth-status');
+
+// ------- SORTEAR FAIXA -------
 
 function drawRandomTrack() {
   if (!tracks || tracks.length === 0) {
@@ -62,7 +67,7 @@ if (drawButton && trackTitle && trackArtist && trackPlaylist && trackLink) {
   drawButton.addEventListener('click', drawRandomTrack);
 }
 
-// ------- LOGIN COM SPOTIFY (FUTURO) -------
+// ------- LOGIN COM SPOTIFY -------
 
 // Valores do seu app/site
 const clientId = 'eef1c6de0c7349c19a15f0f41fc4001e';
@@ -72,9 +77,6 @@ const scopes = [
   'user-read-private',
   'user-read-email'
 ];
-
-const loginButton = document.getElementById('login-button');
-const authStatus = document.getElementById('auth-status');
 
 // Monta a URL de autorização do Spotify (Authorization Code Flow).[web:274]
 function buildSpotifyAuthUrl() {
@@ -94,7 +96,10 @@ function buildSpotifyAuthUrl() {
 // Dispara o redirecionamento quando clica no botão
 function handleSpotifyLoginClick() {
   const url = buildSpotifyAuthUrl();
-  authStatus.textContent = 'Status: redirecionando para o Spotify...';
+  if (authStatus) {
+    authStatus.textContent = 'Status: redirecionando para o Spotify...';
+  }
+  // redireciona para a tela de login do Spotify
   window.location.href = url;
 }
 
@@ -106,6 +111,11 @@ function checkSpotifyCallback() {
   const code = params.get('code');
   const error = params.get('error');
 
+  if (!authStatus) {
+    console.log('auth-status não encontrado no DOM.');
+    return;
+  }
+
   if (error) {
     authStatus.textContent = `Status: erro do Spotify (${error}).`;
     console.log('Erro retornado pelo Spotify:', error);
@@ -113,26 +123,25 @@ function checkSpotifyCallback() {
   }
 
   if (code) {
-    // Aqui é onde, no mundo real, você mandaria esse "code"
-    // para um backend trocar por access_token/refresh_token.[web:274]
+    // Aqui, num app real, você trocaria o code por tokens num backend.[web:274][web:277]
     authStatus.textContent = 'Status: autorizado com Spotify (code recebido).';
     console.log('Code recebido do Spotify:', code);
 
-    // (opcional) limpar o ?code= da URL para não ficar feio
+    // Limpa o ?code= da URL para não ficar feio
     if (window.history && window.history.replaceState) {
       const cleanUrl = window.location.origin + window.location.pathname;
       window.history.replaceState({}, document.title, cleanUrl);
     }
   } else {
-    // Nenhum code nem erro: usuário ainda não tentou logar
     authStatus.textContent = 'Status: não conectado ao Spotify.';
   }
 }
 
-// Registrar eventos
+// ------- REGISTRAR EVENTOS -------
 
-if (loginButton && authStatus) {
+if (loginButton) {
   loginButton.addEventListener('click', handleSpotifyLoginClick);
-  // Checa a URL quando a página carrega
-  checkSpotifyCallback();
 }
+
+// Chama SEMPRE quando o script carregar
+checkSpotifyCallback();
