@@ -1,1 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>El Gordo Musical</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1>El Gordo Musical</h1>
+        <p>
+          Cole aqui suas playlists ou use a lista de teste e deixe a sorte
+          escolher a próxima faixa.
+        </p>
+      </header>
 
+      <section class="playlists">
+        <label for="playlists-input">Playlists (por enquanto só texto):</label>
+        <textarea
+          id="playlists-input"
+          placeholder="Cole aqui links ou nomes de playlists (opcional nesta versão)"
+        ></textarea>
+      </section>
+
+      <section class="actions">
+        <button id="draw-button">Sortear faixa</button>
+      </section>
+
+      <section class="result" id="result">
+        <h2>Resultado do sorteio</h2>
+        <p id="track-title">Nenhuma faixa sorteada ainda.</p>
+        <p id="track-artist"></p>
+        <p id="track-playlist"></p>
+        <a id="track-link" href="#" target="_blank" class="hidden">
+          Abrir no Spotify
+        </a>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
