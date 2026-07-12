@@ -3,7 +3,7 @@
 // ===============================
 
 // Substitua esta string pelo seu Client ID verdadeiro do app Spotify
-const SPOTIFY_CLIENT_ID = "SEU_CLIENT_ID_AQUI";
+const SPOTIFY_CLIENT_ID = "eef1c6de0c7349c19a15f0f41fc4001e";
 const SPOTIFY_REDIRECT_URI = "https://museolabs.github.io/el-gordo-musical/";
 
 // Escopo mínimo: ler playlists do usuário (podemos ajustar depois)
