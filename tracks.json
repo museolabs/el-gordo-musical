@@ -1,1 +1,38 @@
-
+[
+  {
+    "title": "Blue in Green",
+    "artist": "Miles Davis",
+    "playlist": "Jazz de fim de noite",
+    "url": "https://open.spotify.com/track/0000000001"
+  },
+  {
+    "title": "Marquee Moon",
+    "artist": "Television",
+    "playlist": "Post-punk essentials",
+    "url": "https://open.spotify.com/track/0000000002"
+  },
+  {
+    "title": "Pow R. Toc H.",
+    "artist": "Pink Floyd",
+    "playlist": "Psychedelic trips",
+    "url": "https://open.spotify.com/track/0000000003"
+  },
+  {
+    "title": "Hallogallo",
+    "artist": "NEU!",
+    "playlist": "Krautrock motorik",
+    "url": "https://open.spotify.com/track/0000000004"
+  },
+  {
+    "title": "Vento Bravo",
+    "artist": "Edu Lobo",
+    "playlist": "MPB profunda",
+    "url": "https://open.spotify.com/track/0000000005"
+  },
+  {
+    "title": "Dopesmoker",
+    "artist": "Sleep",
+    "playlist": "Doom monolitos",
+    "url": "https://open.spotify.com/track/0000000006"
+  }
+]
