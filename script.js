@@ -60,12 +60,9 @@ if (drawButton && trackTitle && trackArtist && trackPlaylist && trackLink) {
 
 // ------- LOGIN COM SPOTIFY (FUTURO) -------
 
-// IMPORTANTE: troque estes dois valores depois
-// 1) Coloque aqui o SEU client_id do app Spotify
-// 2) Coloque aqui a URL do SEU site no GitHub Pages como redirectUri
-
-const clientId = 'SEU_CLIENT_ID_DO_SPOTIFY_AQUI';
-const redirectUri = 'https://SEU-USUARIO.github.io/el-gordo-musical/';
+// Estes valores já estão ajustados para o seu app/site
+const clientId = 'eef1c6de0c7349c19a15f0f41fc4001e';
+const redirectUri = 'https://museolabs.github.io/el-gordo-musical/';
 
 const scopes = [
   'user-read-private',
@@ -92,8 +89,8 @@ function buildSpotifyAuthUrl() {
 function handleSpotifyLoginClick() {
   const url = buildSpotifyAuthUrl();
   authStatus.textContent = 'Status: redirecionando para o Spotify...';
-  // redireciona para a tela de login do Spotify
-  window.location.href = url; // uso padrão de window.location.href para redirecionar.[web:260]
+  // redireciona para a tela de login do Spotify usando window.location.href.[web:251][web:263]
+  window.location.href = url;
 }
 
 if (loginButton && authStatus) {
