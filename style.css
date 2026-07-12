@@ -96,3 +96,27 @@ body {
 .hidden {
   display: none;
 }
+
+.auth {
+  margin-top: 1.25rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  background: #020617;
+  border: 1px solid #1f2937;
+}
+
+#login-button {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid #facc15;
+  background: transparent;
+  color: #facc15;
+  font-size: 0.9rem;
+  cursor: not-allowed; /* por enquanto é só ilustrativo */
+}
+
+#auth-status {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  color: #cbd5f5;
+}
