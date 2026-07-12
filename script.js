@@ -60,7 +60,7 @@ if (drawButton && trackTitle && trackArtist && trackPlaylist && trackLink) {
 
 // ------- LOGIN COM SPOTIFY (FUTURO) -------
 
-// Estes valores já estão ajustados para o seu app/site
+// Valores do seu app/site
 const clientId = 'eef1c6de0c7349c19a15f0f41fc4001e';
 const redirectUri = 'https://museolabs.github.io/el-gordo-musical/';
 
@@ -77,7 +77,8 @@ function buildSpotifyAuthUrl() {
 
   const params = new URLSearchParams({
     client_id: clientId,
-    response_type: 'token', // fluxo implícito
+    // Spotify agora exige response_type=code
+    response_type: 'code', // fluxo Authorization Code.[web:274]
     redirect_uri: redirectUri,
     scope: scopes.join(' '),
     show_dialog: 'true'
@@ -89,8 +90,8 @@ function buildSpotifyAuthUrl() {
 function handleSpotifyLoginClick() {
   const url = buildSpotifyAuthUrl();
   authStatus.textContent = 'Status: redirecionando para o Spotify...';
-  // redireciona para a tela de login do Spotify usando window.location.href.[web:251][web:263]
-  window.location.href = url;
+  // redireciona para a tela de login do Spotify
+  window.location.href = url; // redirecionamento padrão com window.location.href.[web:263]
 }
 
 if (loginButton && authStatus) {
