@@ -22,34 +22,45 @@ fetch('tracks.json')
 
 // ------- SORTEAR FAIXA -------
 
-const drawButton = document.getElementById('draw-track-button');
-const resultDiv = document.getElementById('track-result');
+const drawButton = document.getElementById('draw-button');
+const trackTitle = document.getElementById('track-title');
+const trackArtist = document.getElementById('track-artist');
+const trackPlaylist = document.getElementById('track-playlist');
+const trackLink = document.getElementById('track-link');
 
 function drawRandomTrack() {
   if (!tracks || tracks.length === 0) {
-    resultDiv.textContent = 'Nenhuma faixa carregada ainda. Tente novamente em alguns segundos.';
+    trackTitle.textContent = 'Nenhuma faixa carregada ainda. Tente novamente em alguns segundos.';
+    trackArtist.textContent = '';
+    trackPlaylist.textContent = '';
+    trackLink.classList.add('hidden');
+    trackLink.href = '#';
     return;
   }
 
   const randomIndex = Math.floor(Math.random() * tracks.length);
   const track = tracks[randomIndex];
 
-  resultDiv.innerHTML = `
-    <p><strong>Faixa sorteada:</strong></p>
-    <p>Título: ${track.title}</p>
-    <p>Artista: ${track.artist}</p>
-    <p>Playlist: ${track.playlist}</p>
-    <p><a href="${track.url}" target="_blank">Abrir no Spotify</a></p>
-  `;
+  trackTitle.textContent = `Faixa sorteada: ${track.title}`;
+  trackArtist.textContent = `Artista: ${track.artist}`;
+  trackPlaylist.textContent = `Playlist: ${track.playlist}`;
+
+  if (track.url) {
+    trackLink.href = track.url;
+    trackLink.classList.remove('hidden');
+  } else {
+    trackLink.classList.add('hidden');
+    trackLink.href = '#';
+  }
 }
 
-if (drawButton && resultDiv) {
+if (drawButton && trackTitle && trackArtist && trackPlaylist && trackLink) {
   drawButton.addEventListener('click', drawRandomTrack);
 }
 
 // ------- LOGIN COM SPOTIFY (FUTURO) -------
 
-// IMPORTANTE: ajuste estes dois valores para o seu projeto
+// IMPORTANTE: troque estes dois valores depois
 // 1) Coloque aqui o SEU client_id do app Spotify
 // 2) Coloque aqui a URL do SEU site no GitHub Pages como redirectUri
 
@@ -61,14 +72,15 @@ const scopes = [
   'user-read-email'
 ];
 
-const spotifyLoginButton = document.getElementById('spotify-login-button');
+const loginButton = document.getElementById('login-button');
+const authStatus = document.getElementById('auth-status');
 
 function buildSpotifyAuthUrl() {
   const authEndpoint = 'https://accounts.spotify.com/authorize';
 
   const params = new URLSearchParams({
     client_id: clientId,
-    response_type: 'token',
+    response_type: 'token', // fluxo implícito
     redirect_uri: redirectUri,
     scope: scopes.join(' '),
     show_dialog: 'true'
@@ -79,12 +91,11 @@ function buildSpotifyAuthUrl() {
 
 function handleSpotifyLoginClick() {
   const url = buildSpotifyAuthUrl();
-  // abre na mesma aba
-  window.location.href = url;
-  // se preferir nova aba, troque pela linha abaixo:
-  // window.open(url, '_blank');
+  authStatus.textContent = 'Status: redirecionando para o Spotify...';
+  // redireciona para a tela de login do Spotify
+  window.location.href = url; // uso padrão de window.location.href para redirecionar.[web:260]
 }
 
-if (spotifyLoginButton) {
-  spotifyLoginButton.addEventListener('click', handleSpotifyLoginClick);
+if (loginButton && authStatus) {
+  loginButton.addEventListener('click', handleSpotifyLoginClick);
 }
