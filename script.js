@@ -1,98 +1,72 @@
-* {
-  box-sizing: border-box;
-}
+// Lista fictícia de faixas para teste inicial
+const tracks = [
+  {
+    title: "Blue in Green",
+    artist: "Miles Davis",
+    playlist: "Jazz de fim de noite",
+    url: "https://open.spotify.com/track/0000000001"
+  },
+  {
+    title: "Marquee Moon",
+    artist: "Television",
+    playlist: "Post-punk essentials",
+    url: "https://open.spotify.com/track/0000000002"
+  },
+  {
+    title: "Pow R. Toc H.",
+    artist: "Pink Floyd",
+    playlist: "Psychedelic trips",
+    url: "https://open.spotify.com/track/0000000003"
+  },
+  {
+    title: "Hallogallo",
+    artist: "NEU!",
+    playlist: "Krautrock motorik",
+    url: "https://open.spotify.com/track/0000000004"
+  },
+  {
+    title: "Vento Bravo",
+    artist: "Edu Lobo",
+    playlist: "MPB profunda",
+    url: "https://open.spotify.com/track/0000000005"
+  },
+  {
+    title: "Dopesmoker",
+    artist: "Sleep",
+    playlist: "Doom monolitos",
+    url: "https://open.spotify.com/track/0000000006"
+  }
+];
 
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  background: #0f172a;
-  color: #f9fafb;
-}
+// Espera o HTML carregar antes de acessar os elementos
+document.addEventListener("DOMContentLoaded", () => {
+  const drawButton = document.getElementById("draw-button");
+  const titleEl = document.getElementById("track-title");
+  const artistEl = document.getElementById("track-artist");
+  const playlistEl = document.getElementById("track-playlist");
+  const linkEl = document.getElementById("track-link");
 
-.container {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 1.5rem;
-}
+  // Função que sorteia uma faixa aleatória
+  function drawRandomTrack() {
+    if (!tracks.length) {
+      titleEl.textContent = "Nenhuma faixa disponível para sorteio.";
+      artistEl.textContent = "";
+      playlistEl.textContent = "";
+      linkEl.classList.add("hidden");
+      return;
+    }
 
-.header h1 {
-  margin: 0 0 0.5rem;
-}
+    const randomIndex = Math.floor(Math.random() * tracks.length);
+    const track = tracks[randomIndex];
 
-.header p {
-  margin: 0;
-  color: #cbd5f5;
-}
+    titleEl.textContent = `Música: ${track.title}`;
+    artistEl.textContent = `Artista: ${track.artist}`;
+    playlistEl.textContent = `Playlist: ${track.playlist}`;
+    linkEl.href = track.url;
+    linkEl.textContent = "Abrir no Spotify";
+    linkEl.classList.remove("hidden");
+  }
 
-.playlists {
-  margin-top: 1.5rem;
-}
-
-.playlists label {
-  display: block;
-  font-size: 0.9rem;
-  margin-bottom: 0.25rem;
-  color: #cbd5f5;
-}
-
-#playlists-input {
-  width: 100%;
-  min-height: 80px;
-  padding: 0.75rem;
-  border-radius: 0.5rem;
-  border: 1px solid #1f2937;
-  background: #020617;
-  color: #f9fafb;
-  resize: vertical;
-}
-
-.actions {
-  margin-top: 1rem;
-  text-align: center;
-}
-
-#draw-button {
-  padding: 0.75rem 1.5rem;
-  border-radius: 999px;
-  border: none;
-  background: #facc15;
-  color: #1f2937;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-#draw-button:hover {
-  background: #fde047;
-}
-
-.result {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  border-radius: 0.75rem;
-  background: #020617;
-  border: 1px solid #1f2937;
-}
-
-.result h2 {
-  margin: 0 0 0.5rem;
-}
-
-.result p {
-  margin: 0.15rem 0;
-}
-
-#track-link {
-  display: inline-block;
-  margin-top: 0.75rem;
-  color: #22c55e;
-  text-decoration: none;
-}
-
-#track-link:hover {
-  text-decoration: underline;
-}
-
-.hidden {
-  display: none;
-}
+  // Liga o clique do botão à função de sorteio
+  drawButton.addEventListener("click", drawRandomTrack);
+});
